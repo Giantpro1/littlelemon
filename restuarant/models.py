@@ -9,6 +9,7 @@ class Booking(models.Model):
 
     class Meta: 
         verbose_name_plural = 'Booking'
+        
     def __str__(self): 
         return self.first_name
 

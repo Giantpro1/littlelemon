@@ -16,18 +16,21 @@ def about(request):
 
 
 def submit_reservation(request):
-    form = BookingForm()
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-                form.save()
-                return JsonResponse({'message': 'Reservation submitted successfully'})
+            form.save()
+            # Redirect to 'Reservation' after successful form submission
+            return redirect('Reservation')
         else:
-                print(form.errors)
-    else: 
+            # Print form errors for debugging
+            print(form.errors)
+    else:
         form = BookingForm()
-        context = {'form': form}
-        return render(request, 'index.html', context)
+
+    # If the form is not valid or it's a GET request, render the form page
+    context = {'form': form}
+    return render(request, 'index.html', context)
     
     
 
